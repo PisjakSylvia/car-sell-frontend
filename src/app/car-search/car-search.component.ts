@@ -2,10 +2,12 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterOutlet } from '@angular/router';
+import { CarListComponent } from "../car-list/car-list.component";
 
 @Component({
   selector: 'app-car-search',
-  imports: [CommonModule, HttpClientModule, FormsModule],
+  imports: [RouterOutlet, CommonModule, HttpClientModule, FormsModule, CarListComponent],
   templateUrl: './car-search.component.html',
   styleUrl: './car-search.component.css'
 })
@@ -13,6 +15,8 @@ export class CarSearchComponent {
   constructor(private http: HttpClient) { }
   
   counter = 0;
+  showCarList = false; // steuert, ob die CarList-Komponente angezeigt wird
+  
   ngOnInit(): void {
     this.countCars();
     this.loadBrands();
@@ -23,6 +27,7 @@ export class CarSearchComponent {
     this.http.get<any[]>('http://localhost:3000/api/cars-to-sell').subscribe(
       (response) => {
         this.counter = response.length;
+        this.showCarList = !this.showCarList; // zeigt die CarList-Komponente nach dem Button-Klick an
       },
       (error) => {
         console.error('Error:', error);
