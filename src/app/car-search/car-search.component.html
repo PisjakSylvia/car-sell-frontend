@@ -36,7 +36,7 @@
         
         <form class="search-form">
             <select name="marke">
-                <option value="">Marke</option> <!-- Standardwert -->
+                <option value="">Marke</option> <!-- default -->
                 <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
             </select>
             <select name="modell">
@@ -67,3 +67,7 @@
     </div>
 </body>
 </html>
+<!-- wenn der Button gedrückt wird, dann wird die CarListComponente angezeigt
+     wird er erneut betätigt, dann verschwindet sie
+-->
+<app-car-list *ngIf="showCarList"></app-car-list>
