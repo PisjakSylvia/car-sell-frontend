@@ -7,7 +7,7 @@ import { CarListComponent } from "../car-list/car-list.component";
 
 @Component({
   selector: 'app-car-search',
-  imports: [RouterOutlet, CommonModule, HttpClientModule, FormsModule, CarListComponent],
+  imports: [ CommonModule, HttpClientModule, FormsModule, CarListComponent],
   templateUrl: './car-search.component.html',
   styleUrl: './car-search.component.css'
 })
@@ -16,7 +16,8 @@ export class CarSearchComponent {
   
   counter = 0;
   showCarList = false; // steuert, ob die CarList-Komponente angezeigt wird
-  
+  carListButtonText = "Fahrzeuge anzeigen";
+
   ngOnInit(): void {
     this.countCars();
     this.loadBrands();
@@ -28,6 +29,7 @@ export class CarSearchComponent {
       (response) => {
         this.counter = response.length;
         this.showCarList = !this.showCarList; // zeigt die CarList-Komponente nach dem Button-Klick an
+        this.carListButtonText = this.showCarList ? "Fahrzeuge verbergen" : "Fahrzeuge anzeigen";
       },
       (error) => {
         console.error('Error:', error);
