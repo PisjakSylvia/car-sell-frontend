@@ -60,8 +60,8 @@
                 <input type="checkbox" id="new-cars">
                 <label for="new-cars">nur Neu- und Jungwagen</label>
             </div>
-            <button (click)="countCars()">
-                {{ counter }} Fahrzeuge anzeigen
+            <button id="showCarListButton" (click)="countCars()">
+                {{ counter }} {{carListButtonText}}
             </button>
         </form>
     </div>
