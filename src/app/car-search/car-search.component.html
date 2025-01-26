@@ -1,12 +1,3 @@
-<p>car-search works!</p>
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fahrzeugsuche</title>
-    
-</head>
 <body>
     <div class="container">
         <div class="header">Gebrauchtwagen</div>
@@ -35,14 +26,13 @@
         </div>
         
         <form class="search-form">
-            <select name="marke">
-                <option value="">Marke</option> <!-- default -->
+            <select name="marke" [(ngModel)]="selectedBrand" (change)="loadModels()"> <!-- sobald eine andere Marke ausgesucht wird -> neue Modelle laden -->
+                <option value="">Marke</option> 
                 <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
-            </select>
+            </select>            
             <select name="modell">
                 <option value="">Modell</option>
-                <option value="modell1">Modell 1</option>
-                <option value="modell2">Modell 2</option>
+                <option *ngFor="let model of models" [value]="model">{{ model }}</option>
             </select>
             <input type="text" placeholder="Suchbegriff">
             <select name="kilometerstand">
@@ -66,7 +56,6 @@
         </form>
     </div>
 </body>
-</html>
 <!-- wenn der Button gedrückt wird, dann wird die CarListComponente angezeigt
      wird er erneut betätigt, dann verschwindet sie
 -->
