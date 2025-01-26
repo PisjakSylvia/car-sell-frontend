@@ -12,6 +12,7 @@ import { CarListComponent } from "../car-list/car-list.component";
   styleUrl: './car-search.component.css'
 })
 export class CarSearchComponent {
+  selectedBrand: string = "Marke";
   constructor(private http: HttpClient) { }
   
   counter = 0;
@@ -51,7 +52,6 @@ export class CarSearchComponent {
   // abfragen, welche Marken es bereits in der DB gibt
   // diese dann als options bei der Markenauswahl 
   brands: string[] = []; 
-  
   loadBrands(): void {
     this.http.get<any[]>('http://localhost:3000/api/car-brands').subscribe(
       (response) => {
@@ -61,5 +61,21 @@ export class CarSearchComponent {
         console.error('Error:', error);
       }
     );
+  }
+  models: string[] = []; 
+  // Modelle von der ausgewählten Marke laden
+  loadModels(): void {
+    if (this.selectedBrand) {
+      this.http.get<string[]>(`http://localhost:3000/api/car-models/${this.selectedBrand}`).subscribe(
+        (response) => {
+          this.models = response;
+        },
+        (error) => {
+          console.error('Error:', error);
+        }
+      );
+    } else {
+      this.models = []; // wenn keine Marke ausgewählt ist -> nix anzeigen
+    }
   }
 }
