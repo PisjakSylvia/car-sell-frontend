@@ -1,0 +1,70 @@
+<p>car-sell works!</p>
+<div class="car-sell-container">
+    <h1>Auto Verkaufen</h1>
+    <form (ngSubmit)="submitCarData()" class="car-sell-form">
+      <div class="form-group">
+        <label for="marke">Marke:</label>
+        <input type="text" id="marke" [(ngModel)]="carData.Marke" name="Marke" required />
+      </div>
+      <div class="form-group">
+        <label for="type">Typ:</label>
+        <input type="text" id="type" [(ngModel)]="carData.Type" name="Type" required />
+      </div>
+      <div class="form-group">
+        <label for="model">Model:</label>
+        <input type="text" id="model" [(ngModel)]="carData.Model" name="Model" required />
+      </div>
+      <div class="form-group">
+        <label for="color">Farbe:</label>
+        <div class="color-dropdown" (click)="toggleDropdown()">
+          <div class="selected-color">
+            <span class="color-box" [style.background-color]="selectedColor.hex"></span>
+            <span>{{ selectedColor.name || 'Bitte Farbe wählen' }}</span>
+          </div>
+          <div class="dropdown-options" *ngIf="dropdownOpen">
+            <div class="dropdown-option" *ngFor="let color of colors" (click)="selectColor(color)">
+              <span class="color-box" [style.background-color]="color.hex"></span>
+              <span>{{ color.name }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="price">Preis (€):</label>
+        <input type="number" id="price" [(ngModel)]="carData.price" name="price" required />
+      </div>
+      <div class="form-group">
+        <label for="fuel">Kraftstoff:</label>
+        <select id="fuel" [(ngModel)]="carData.fuel" name="fuel" required>
+          <option value="Benzin">Benzin</option>
+          <option value="Diesel">Diesel</option>
+          <option value="Elektro">Elektro</option>
+          <option value="Hybrid">Hybrid</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="condition">Zustand:</label>
+        <select id="condition" [(ngModel)]="carData.condition" name="condition" required>
+          <option value="Neu">Neu</option>
+          <option value="Gebraucht">Gebraucht</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="registrationDate">Erstzulassung:</label>
+        <input type="date" id="registrationDate" [(ngModel)]="carData.registrationDate" name="registrationDate" required />
+      </div>
+      <div class="form-group">
+        <label for="mileage">Kilometerstand:</label>
+        <input type="number" id="mileage" [(ngModel)]="carData.mileage" name="mileage" required />
+      </div>
+      <div class="form-group">
+        <label for="description">Beschreibung:</label>
+        <input type="text" id="description" [(ngModel)]="carData.description" name="description" required />
+      </div>
+      <div class="form-group">
+        <label for="image">Bild hochladen:</label>
+        <input type="file" id="image" (change)="handleImageUpload($event)" required />
+      </div>
+      <button type="submit">Auto speichern</button>
+    </form>
+  </div>
