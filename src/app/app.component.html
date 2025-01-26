@@ -1,7 +1,18 @@
-<h1>WILLHABEN</h1>
+<header>
+    <h1>WILLHABEN</h1>
+</header>
+<main>
+    <button id="car" (click)="toggleCarSearch()">AUTO & MOTOR</button>
+    <!-- Die Komponente wird nur angezeigt, wenn 'showCarList' wahr ist -->
+    <section *ngIf="showCarList">
+        <app-car-list></app-car-list>
+    </section>
+    <section *ngIf="showCarSearch">
+        <app-car-search></app-car-search>
+    </section>
+    <button id="car" (click)="toggleCarSell()">SELL</button>
 
-<button (click)="toggleCarList()">Show/Hide Car List</button>
-<button (click)="toggleCarSearch()"> AUTO & MOTOR </button>
-<!-- Die Komponente wird nur angezeigt, wenn 'showCarList' wahr ist -->
-<app-car-list *ngIf="showCarList"></app-car-list>
-<app-car-search *ngIf="showCarSearch"></app-car-search>
+    <section *ngIf="showCarSell">
+        <app-car-sell></app-car-sell>
+    </section>
+</main>
