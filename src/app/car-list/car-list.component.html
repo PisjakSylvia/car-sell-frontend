@@ -1,39 +1,23 @@
-<p>car-list works!</p>
-
-<!-- Hinzufügen von einem neuen Auto (muss auf anderes html getan werden) -->
-<form (ngSubmit)="addCar()" #carForm="ngForm">
-  <label for="description">Description:</label>
-  <input type="text" id="description" [(ngModel)]="newCar.description" name="description" required />
-
-  <label for="price">Price:</label>
-  <input type="number" id="price" [(ngModel)]="newCar.price" name="price" required />
-
-  <label for="regristationDate">Registration Date:</label>
-  <input type="date" id="regristationDate" [(ngModel)]="newCar.regristationDate" name="regristationDate" required />
-
-  <label for="mileage">Mileage:</label>
-  <input type="number" id="mileage" [(ngModel)]="newCar.mileage" name="mileage" required />
-
-  <label for="fuel">Fuel:</label>
-  <input type="text" id="fuel" [(ngModel)]="newCar.fuel" name="fuel" required />
-
-  <label for="color">Color:</label>
-  <input type="text" id="color" [(ngModel)]="newCar.color" name="color" required />
-
-  <label for="condition">Condition:</label>
-  <input type="text" id="condition" [(ngModel)]="newCar.condition" name="condition" required />
-
-  <label for="carsId">Cars-ID:</label>
-  <input type="text" id="carsId" [(ngModel)]="newCar.carsId" name="carsId" required />
-
-  <button type="submit">Add Car</button>
-</form>
-
-<!-- Liste der Autos -->
-<ul>
-  <li *ngFor="let item of items">
-    {{ item.description }}, {{ item.price }} €, {{ item.regristationDate }}, 
-    {{ item.mileage }} km, {{ item.fuel }}, {{ item.color }}, 
-    {{ item.condition }}, {{ item.carsId }}
-  </li>
-</ul>
+<div class="container">
+    <ul class="car-list">
+        <li class="car-item" *ngFor="let item of items">
+            <div class="titel">
+                <h2>{{ item.Marke }}, {{ item.Type }}, {{ item.Model }}</h2>
+            </div>
+            <div class="car-image">
+                <img [src]="item.imageReady" alt="Verkaufsbilder">
+            </div>
+            <div class="car-info">
+                <p>{{ item.description }}</p>
+                <p>{{ item.fuel }}</p>
+                <p>{{ item.condition }}</p>
+                <div class="car-details">
+                    <span><strong>EZ {{ item.regristationDate }}</strong></span>
+                    <span><strong>{{ item.mileage}} km</strong></span>
+                    <span><strong>{{ item.price}} €</strong></span>
+                </div>
+            
+            </div>
+        </li>
+    </ul>
+</div>
