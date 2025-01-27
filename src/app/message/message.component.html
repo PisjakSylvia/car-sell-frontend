@@ -1,0 +1,51 @@
+<p>message works!</p>
+<div class="message-container">
+    <h2>Nachricht schreiben</h2>
+  
+    <form (ngSubmit)="sendMessage()">
+      <div class="form-group">
+        <label for="recipient">Empfänger</label>
+        <input
+          type="text"
+          id="recipient"
+          [(ngModel)]="message.recipient"
+          name="recipient"
+          required
+          placeholder="Empfänger eingeben"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="subject">Betreff</label>
+        <input
+          type="text"
+          id="subject"
+          [(ngModel)]="message.subject"
+          name="subject"
+          required
+          placeholder="Betreff eingeben"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="content">Nachricht</label>
+        <textarea
+          id="content"
+          [(ngModel)]="message.content"
+          name="content"
+          required
+          placeholder="Nachricht eingeben"
+        ></textarea>
+      </div>
+  
+      <button type="submit" class="send-button">Senden</button>
+    </form>
+  
+    <div *ngIf="successMessage" class="success-message">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  </div>
+  
