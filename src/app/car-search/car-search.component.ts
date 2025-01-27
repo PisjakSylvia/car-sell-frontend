@@ -12,7 +12,8 @@ import { CarListComponent } from "../car-list/car-list.component";
   styleUrl: './car-search.component.css'
 })
 export class CarSearchComponent {
-  selectedBrand: string = "Marke";
+  selectedBrand: string = "Marke"; // eig der default
+  
   constructor(private http: HttpClient) { }
   
   counter = 0;
@@ -51,11 +52,17 @@ export class CarSearchComponent {
 
   // abfragen, welche Marken es bereits in der DB gibt
   // diese dann als options bei der Markenauswahl 
+  // in html -> [(ngModel)] ist Two-Way-Datenbindung das den Wert eines Formularsteuerelements 
+  //            mit einer Komponenteneigenschaft synchronisiert
+  //         -> verbindet zB ausgewählte Marke mit "eigenschaft" selectedBrand im ts
+  //         -> Marke wird in selectedBrand gespeichert
   brands: string[] = []; 
   loadBrands(): void {
+    console.log(this.selectedBrand);
     this.http.get<any[]>('http://localhost:3000/api/car-brands').subscribe(
       (response) => {
         this.brands = response;
+
       },
       (error) => {
         console.error('Error:', error);
