@@ -3,6 +3,10 @@
         <div class="header">Gebrauchtwagen</div>
         <div class="form-title">Welches Fahrzeug suchst du?</div>
         <div class="vehicle-types">
+            <!-- [ngClass] ermöglicht dynamisch CSS auf ein Element anzuwenden
+                 jenachdem welches img angeklickt wird, wird das Vehicle gespeicher
+                 sobald isSelected === true is, wird die CSS-Klasse "selected" angewendet
+            -->
             <div class="vehicle" (click)="selectVehicle('Limousine')">
                 <img [ngClass]="{ 'selected': isSelected('Limousine') }" src="limousine.jpg" alt="Limousine">
                 <p class="vehicle-title">Limousine</p>
@@ -27,7 +31,7 @@
         
         <form class="search-form">
             <select name="marke" [(ngModel)]="selectedBrand" (change)="loadModels()"> <!-- sobald eine andere Marke ausgesucht wird -> neue Modelle laden -->
-                <option value="">Marke</option> 
+                <option value="Marke">Marke</option> 
                 <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
             </select>            
             <select name="modell">
