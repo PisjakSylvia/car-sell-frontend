@@ -59,31 +59,4 @@ export class CarListComponent {
       }
     );
   }
-
-
-
-  addCar(): void {
-    // funktionier noch nict zu 100%
-    this.http.post('http://localhost:3000/api/cars-to-sell', this.newCar).subscribe(
-      (response) => {
-        console.log('Car added:', response);
-        this.items.push(response); // Neues Auto zur Liste hinzufügen
-        this.newCar = {
-          description: '',
-          price: null,
-          regristationDate: '',
-          mileage: null,
-          fuel: '',
-          color: '',
-          condition: '',
-          carsId: ''
-        }; // Formular zurücksetzen
-      },
-      (error) => {
-        console.error('Error:', error);
-      }
-    );
-  }
-
-
 }
