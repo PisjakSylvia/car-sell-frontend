@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { CarListComponent } from "../car-list/car-list.component";
+import { CarFilterService } from '../services/car-filter.service';  // Importiere den Service
 
 @Component({
   selector: 'app-car-search',
@@ -12,10 +13,45 @@ import { CarListComponent } from "../car-list/car-list.component";
   styleUrl: './car-search.component.css'
 })
 export class CarSearchComponent {
+  vehicleType: string = '';
   selectedBrand: string = "Marke"; // eig der default
+  selectedModel: string = '';
+  selectedDescription: string = '';
+  selectedMileage: string = '';
+  selectedRegistrationdate: string = '';
+  selectedPrice: number = 0;
+  onlyNewCars: boolean = false;
+
+  constructor(private http: HttpClient, private carFilterService: CarFilterService) { }
   
-  constructor(private http: HttpClient) { }
+
+  // Wenn das Formular abgesendet wird ->  Daten an den Service senden
+  onFormSubmit() {
+    const mileage = this.selectedMileage ? parseInt(this.selectedMileage, 10) : null;
+
+    const formData = {
+      brand: this.selectedBrand || null,
+      model: this.selectedModel || null,
+      type: this.selectedVehicle || null,
+      description: this.selectedDescription || null,
+      mileage: mileage || null,
+      registrationdate: this.selectedRegistrationdate || null,
+      price: this.selectedPrice || null,
+    };
   
+    console.log("formData ", formData);
+  
+    // Formulardaten an den Service übergeben
+    this.carFilterService.setFilterData(formData);
+  }
+  
+
+// In your component TS file
+handleButtonClick(): void {
+  this.countCars();
+  this.onFormSubmit();
+}
+
   counter = 0;
   showCarList = false; // steuert, ob die CarList-Komponente angezeigt wird
   carListButtonText = "Fahrzeuge anzeigen";
@@ -45,6 +81,9 @@ export class CarSearchComponent {
   selectedVehicle = "";
   selectVehicle(vehicleType: string): void {
     this.selectedVehicle = vehicleType;
+    console.log(vehicleType);
+    console.log(this.selectedVehicle);
+
   }
   isSelected(vehicleType: string): boolean {
     return this.selectedVehicle === vehicleType;
