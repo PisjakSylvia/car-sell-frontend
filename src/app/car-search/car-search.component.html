@@ -34,29 +34,33 @@
                 <option value="Marke">Marke</option> 
                 <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
             </select>            
-            <select name="modell">
+            <select name="modell" [(ngModel)]="selectedModel">
                 <option value="">Modell</option>
                 <option *ngFor="let model of models" [value]="model">{{ model }}</option>
             </select>
-            <input type="text" placeholder="Suchbegriff">
-            <select name="kilometerstand">
-                <option value="">km-Stand bis</option>
-                <option value="50000">50.000 km</option>
-                <option value="100000">100.000 km</option>
+            <input type="text" name="description" [(ngModel)]="selectedDescription" placeholder="Suchbegriff">
+            <select name="kilometerstand" [(ngModel)]="selectedMileage">
+                <option value="">km-Stand </option>
+                <option value="50000">bis zu 50.000 km</option>
+                <option value="100000">bis zu 100.000 km</option>
+                <option value="">über 100.000 km</option>
             </select>
-            <select name="ez">
-                <option value="">EZ ab</option>
-                <option value="2020">2020</option>
-                <option value="2015">2015</option>
+            <select name="ez" [(ngModel)]="selectedRegistrationdate">
+                <option value="">Erstzulassung </option>
+                <option value="2020-01-01">ab 2020</option>
+                <option value="2015-01-01">ab 2015</option>
+                <option value="2000-01-01">ab 2000</option>
+                <option value="1999-12-31">vor 2000</option>
             </select>
             <input type="number" placeholder="Preis bis" min="0">
             <div class="checkbox">
                 <input type="checkbox" id="new-cars">
                 <label for="new-cars">nur Neu- und Jungwagen</label>
             </div>
-            <button id="showCarListButton" (click)="countCars()">
-                {{ counter }} {{carListButtonText}}
+            <button id="showCarListButton" (click)="handleButtonClick()">
+              {{ counter }} {{ carListButtonText }}
             </button>
+            
         </form>
     </div>
 </body>
