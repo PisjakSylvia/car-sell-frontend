@@ -18,7 +18,7 @@ export class CarListComponent {
   newCar: any = {
     description: '',
     price: null,
-    regristationDate: '',
+    registrationDate: '',
     mileage: null,
     fuel: '',
     color: '',
@@ -62,7 +62,7 @@ export class CarListComponent {
         for (let i = 0; i < this.items.length; i ++) {
           if (this.items[i].image != null) {
             console.log(this.items[i].image.data);
-            console.log("regDate" + this.items[i].regristationDate);
+            console.log("regDate" + this.items[i].registrationDate);
             let rawImage = this.items[i].image.data.map((c: number) => String.fromCharCode(c)).join('');
             this.items[i].imageReady = "data:image/jpeg;base64," + rawImage;
           }
@@ -95,8 +95,8 @@ export class CarListComponent {
     } else {
       queryParams.push("null");
     }
-    if (filters.searchTerm) { 
-      queryParams.push(filters.searchTerm);
+    if (filters.description) { 
+      queryParams.push(filters.description);
     } else {
       queryParams.push("null");
     }
@@ -105,13 +105,13 @@ export class CarListComponent {
     } else {
       queryParams.push("null");
     }
-    if (filters.ez) {
-      queryParams.push(filters.ez);
+    if (filters.registrationdate) {
+      queryParams.push(filters.registrationdate);
     } else {
       queryParams.push("null");
     }
-    if (filters.kilometerstand) {
-      queryParams.push(filters.kilometerstand);
+    if (filters.mileage) {
+      queryParams.push(filters.mileage);
     } else {
       queryParams.push("null");
     }
