@@ -12,7 +12,7 @@
                 <p>{{ item.fuel }}</p>
                 <p>{{ item.condition }}</p>
                 <div class="car-details">
-                    <span><strong>EZ {{ item.regristationDate }}</strong></span>
+                    <span><strong>EZ {{ item.registrationDate | date: 'dd. MMMM yyyy' }}</strong></span>
                     <span><strong>{{ item.mileage}} km</strong></span>
                     <span><strong>{{ item.price}} €</strong></span>
                 </div>
