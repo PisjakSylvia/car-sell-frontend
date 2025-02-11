@@ -9,11 +9,15 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './car-sell.component.html',
   styleUrl: './car-sell.component.css',
   standalone: true 
-
 })
+
 export class CarSellComponent {
   constructor(private http: HttpClient) {}
-
+  ngOnInit(): void {
+    this.loadBrands(); // Lade die Marken, sobald die Komponente initialisiert wird
+    this.loadModels();
+  }
+  
   dropdownOpen = false;
   selectedColor = { name: '', hex: '' };
   colors = [
@@ -118,4 +122,62 @@ export class CarSellComponent {
 
 
 
+
+  selectedBrand: string = "Marke"; 
+  selectedModel: string = '';
+  selectedType: string = '';
+
+
+  brands: string[] = []; 
+  loadBrands(): void {
+    console.log(this.selectedBrand);
+    this.http.get<any[]>('http://localhost:3000/api/car-brands').subscribe(
+      (response) => {
+        this.brands = response;
+
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
+  }
+  models: string[] = []; 
+  // Modelle von der ausgewählten Marke laden
+  loadModels(): void {
+    if (this.selectedBrand) {
+      this.carData.Marke = this.selectedBrand;
+      this.types = []; // Zurücksetzen der Typen-Liste bei neuer Marke
+
+      this.http.get<string[]>(`http://localhost:3000/api/car-models/${this.selectedBrand}`).subscribe(
+        (response) => {
+          this.models = response;
+        },
+        (error) => {
+          console.error('Error:', error);
+        }
+      );
+    } else {
+      this.models = []; // wenn keine Marke ausgewählt ist -> nix anzeigen
+    }
+  }
+  types: string[] = [];
+  loadTypes(): void {
+    if (this.selectedBrand) {
+      this.http.get<string[]>(`http://localhost:3000/api/car-types/${this.selectedBrand}/${this.selectedModel}`).subscribe(
+        (response) => {
+          this.types = response;
+        },
+        (error) => {
+          console.error('Error:', error);
+        }
+      );
+    } else {
+      this.types = []; // wenn keine Marke ausgewählt ist -> nix anzeigen
+    }
+  }
+
+  onModelChange(): void {
+    this.carData.Model = this.selectedModel;
+    this.loadTypes();
+  }
 }
