@@ -3,16 +3,22 @@
     <h1>Auto Verkaufen</h1>
     <form (ngSubmit)="submitCarData()" class="car-sell-form">
       <div class="form-group">
-        <label for="marke">Marke:</label>
-        <input type="text" id="marke" [(ngModel)]="carData.Marke" name="Marke" required />
+        <select name="marke" [(ngModel)]="selectedBrand" (change)="loadModels()"> <!-- sobald eine andere Marke ausgesucht wird -> neue Modelle laden -->
+          <option value="Marke">Marke</option> 
+          <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
+      </select>
       </div>
       <div class="form-group">
-        <label for="type">Typ:</label>
-        <input type="text" id="type" [(ngModel)]="carData.Type" name="Type" required />
+        <select name="modell" [(ngModel)]="selectedModel" (change)="onModelChange()">
+          <option value="">Modell</option>
+          <option *ngFor="let model of models" [value]="model">{{ model }}</option>
+        </select>
       </div>
       <div class="form-group">
-        <label for="model">Model:</label>
-        <input type="text" id="model" [(ngModel)]="carData.Model" name="Model" required />
+        <select name="type" [(ngModel)]="selectedType"(change)="onModelChange()">
+          <option value="">Type</option>
+          <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="color">Farbe:</label>
@@ -31,7 +37,7 @@
       </div>
       <div class="form-group">
         <label for="price">Preis (€):</label>
-        <input type="number" id="price" [(ngModel)]="carData.price" name="price" required />
+        <input type="number" min = 0 id="price" [(ngModel)]="carData.price" name="price" required />
       </div>
       <div class="form-group">
         <label for="fuel">Kraftstoff:</label>
@@ -55,7 +61,7 @@
       </div>
       <div class="form-group">
         <label for="mileage">Kilometerstand:</label>
-        <input type="number" id="mileage" [(ngModel)]="carData.mileage" name="mileage" required />
+        <input type="number"  min = 0 id="mileage" [(ngModel)]="carData.mileage" name="mileage" required />
       </div>
       <div class="form-group">
         <label for="description">Beschreibung:</label>
